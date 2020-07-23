@@ -1,7 +1,7 @@
 package modelo;
 
 public class BeanPeriodos {
-    int id;
+    int Id;
     float Anio;
     String Nombre;
 
@@ -9,19 +9,19 @@ public class BeanPeriodos {
     public BeanPeriodos() {
 
     }
-    public BeanPeriodos(int id,float Anio, String Nombre) {
-        this.id = id;
+    public BeanPeriodos(int Id,float Anio, String Nombre) {
+        this.Id = Id;
         this.Anio = Anio;
         this.Nombre = Nombre;
 
     }
 
     public int getId() {
-        return id;
+        return Id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int Id) {
+        this.Id = Id;
     }
 
     public float getAnio() {
@@ -36,6 +36,9 @@ public class BeanPeriodos {
         return Nombre   ;
     }
 
-    public void setNombre(String Nombre) { this.Nombre = Nombre; }
+    public void setNombre(String Nombre) {
+        this.Nombre = Nombre;
+    }
+
 
 }
