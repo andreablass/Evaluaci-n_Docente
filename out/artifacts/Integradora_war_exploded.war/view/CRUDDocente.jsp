@@ -58,16 +58,61 @@
         </tr>
         </tbody>
     </table>
-    <!-- Botones -->
-    <center>
-        <div class="card" style="width: 18rem; border: #132D5E" >
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item"><button type="button" class="btn btn-outline-success">Agregar</button></li>
-                <li class="list-group-item"><button type="button" class="btn btn-outline-warning">Modificar</button></li>
-                <li class="list-group-item"><button type="button" class="btn btn-outline-danger">Eliminar</button></li>
-            </ul>
+
+    
+    <div class="card-deck">
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Example label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Another label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted"><button type="button" class="btn btn-outline-success">Agregar</button></small>
+            </div>
         </div>
-    </center>
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Example label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Another label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted"><button type="button" class="btn btn-outline-warning">Modificar</button></small>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Example label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Example input placeholder">
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput2">Another label</label>
+                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder">
+                    </div>
+                </form>
+            </div>
+            <div class="card-footer">
+                <small class="text-muted"><button type="button" class="btn btn-outline-danger">Eliminar</button></small>
+            </div>
+        </div>
+    </div>
 
 </body>
 </html>

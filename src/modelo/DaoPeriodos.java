@@ -141,46 +141,46 @@ public class DaoPeriodos {
 
         //Agregar Periodo
 
-        BeanPeriodos periodo = new BeanPeriodos();
+         BeanPeriodos periodo = new BeanPeriodos();
 
-        periodo.setId(4);
-        periodo.setAnio(2019);
-        periodo.setNombre("Mayo-Agosto");
+        //periodo.setId(6);
+        // periodo.setAnio(2019);
+        //periodo.setNombre("Mayo-Agosto");
 
-        boolean status = daoPer.agregarPeriodo(periodo);
-        System.out.println("Resultado:" + status);
+         boolean status = daoPer.agregarPeriodo(periodo);
+        //System.out.println("Resultado:" + status);
 
 
         //Consultar Periodos
 
-        List<BeanPeriodos> periodos = daoPer.consultarPeriodos();
-        for (BeanPeriodos mostrar : periodos) {
-            System.out.println("Identificador" + mostrar.getId());
-            System.out.println("Año" + mostrar.getAnio());
-            System.out.println("Nombre" + mostrar.getNombre());
+        //List<BeanPeriodos> periodos = daoPer.consultarPeriodos();
+        //for (BeanPeriodos mostrar : periodos) {
+            // System.out.println("Identificador" + mostrar.getId());
+            // System.out.println("Año" + mostrar.getAnio());
+            // System.out.println("Nombre" + mostrar.getNombre());
 
-        }
+            // }
 
-        //Update Docente
-
+        //Modificar Periodos
         periodo = new BeanPeriodos();
 
-        periodo.setId(6);
-        periodo.setAnio(2020);
-        periodo.setNombre("Feb-abr");
+        periodo.setId(1);
+        periodo.setAnio(2090);
+        periodo.setNombre("Mayo-abr");
 
         status = daoPer.modificarPeriodo(periodo);
         System.out.println("Resultado:" + status);
 
-        //Eliminar Docente
+        //Eliminar periodos
 
-        periodo = new BeanPeriodos();
+        //eriodo = new BeanPeriodos();
 
-        periodo.setId(2);
-        status = daoPer.eliminarPeriodo(periodo);
-        System.out.println("Resultado" + status);
+        //periodo.setId(6);
+        //status = daoPer.eliminarPeriodo(periodo);
+        // System.out.println("Resultado" + status);
 
     }
 
 
 }
+
