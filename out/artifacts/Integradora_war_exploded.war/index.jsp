@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="css/estilosDeInicio.css">
   </head>
-  <body>
+  <body background-image: linear-gradient( 109.6deg, rgba(0,110,141,1) 21%, rgba(145,200,76,1) 83% );>
 
   <div class="container login-container">
     <div class="row">
