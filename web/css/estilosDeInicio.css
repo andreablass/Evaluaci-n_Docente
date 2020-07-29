@@ -7,10 +7,30 @@
     margin-bottom: 5%;
 }
 .login-form-1{
+    left: 150px;
     padding: 5%;
     background: #132D5E;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    max-width: 400px;
+    min-width: 250px;
+    margin: 10px;
+    box-shadow: 0px 2px 10px aliceblue;
+    border: 2px solid rgba(7, 7, 7, 0.12);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
+     
 }
+ 
+ .login-form-1:hover {
+    max-width: 420px;
+    min-width: 260px;
+    
+ }
+ .login-form-1:hover .icon {
+    background-position: -120px;
+    transition: all 0.3s ease;
+ }
 .login-form-1 h3{
     text-align: center;
     color: #fff;
@@ -19,7 +39,21 @@
     padding: 5%;
     background: #0F987A;
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    max-width: 400px;
+    min-width: 250px;
+    margin: 10px;
+    box-shadow: 0px 2px 10px  aliceblue;
+    border: 2px solid rgba(7, 7, 7, 0.12);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
+ 
+ .login-form-2:hover {
+    max-width: 420px;
+    min-width: 260px;
+    
+ }
 .login-form-2 h3{
     text-align: center;
     color: #fff;
@@ -37,12 +71,20 @@
 }
 .login-form-1 .btn{
     font-weight: 600;
-    color: #132D5E;
+    color: #fff;
 }
+.login-form-1 .btn:hover{
+    color: #132D5E;
+    background-color: #ffffff;
+  }
 .login-form-2 .btn{
     font-weight: 600;
-    color: #0F987A;
+    color: #fff;
 }
+.login-form-2 .btn:hover{
+    color: #0F987A;
+    background-color: #ffffff;
+  }
 .login-form-2 .ForgetPwd{
     color: #132D5E;
     font-weight: 600;
