@@ -26,19 +26,18 @@ public class BeanDocente {
         this.nombre = nombre;
     }
 
-    public String getApellidoP() {
+    public String getApellido1() {
         return apellidoP;
     }
 
-    public void setApellidoP(String apellidoP) {
+    public void setApellido1(String apellidoP) {
         this.apellidoP = apellidoP;
     }
 
-    public String getApellidoM() {
+    public String getApellido2() {
         return apellidoM;
     }
-
-    public void setApellidoM(String apellidoM) {
+    public void setApellido2(String apellidoM) {
         this.apellidoM = apellidoM;
     }
 

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 
 @WebServlet("/ServletCargaDatos")
@@ -29,22 +28,37 @@ public class ServletCargaDatos extends HttpServlet {
     public void atenderPeticion(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException{
         //OBTENCION PREGUNTAS
         DaoPregunta DaoPre = new DaoPregunta();
-        List<BeanPregunta> preguntasX = DaoPre.consultarPreguntas();
+        List<BeanPregunta> preguntasN = DaoPre.consultarPreguntas();
+        List<BeanPregunta> preguntasC = DaoPre.consultarComentarios();
+
         //OBTENCION DOCENTES
-        DaoDocente daoDoc = new DaoDocente();
-        List<BeanDocente> docentesX = daoDoc.consultarDocentes();
+
         //CONSERVA DE DATOS
-        String token = request.getParameter("token");
-        String correo = request.getParameter("correo");
+        int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
+        int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));
+        int idPeriodo = Integer.parseInt(request.getParameter("idPeriodo"));
+        int index = 0;
+        DaoDocente daoDoc = new DaoDocente();
+        List<BeanDocente> docentesX = daoDoc.consultarDocentesGrupo(idGrupo);
         //INSERCION DE DATOS
-        request.setAttribute("token", token);
-        request.setAttribute("correo", correo);
         request.setAttribute("docentes", docentesX);
-        request.setAttribute("preguntas", preguntasX);
-        request.getRequestDispatcher("/view/encuesta.jsp").forward(request, response);
+        request.setAttribute("preguntasN", preguntasN);
+        request.setAttribute("preguntasC", preguntasC);
+        request.setAttribute("idAlumno", idAlumno);
+        request.setAttribute("idGrupo", idGrupo);
+        request.setAttribute("idPeriodo", idPeriodo);
+        if(request.getParameter("index") == null){
+            request.setAttribute("index", index);
+            request.getRequestDispatcher("/view/encuesta.jsp").forward(request, response);
 
-        PrintWriter out = response.getWriter();
-        out.println("correo"+ correo);
+        }else{
+            index = Integer.parseInt(request.getParameter("index"));
+            request.setAttribute("index", index);
+            if(index < docentesX.size()){
+                request.getRequestDispatcher("/view/encuesta.jsp").forward(request, response);
+            }else{
+                request.getRequestDispatcher("/view/terminarEncuesta.jsp").forward(request, response);
+            }
+        }
     }
-
 }

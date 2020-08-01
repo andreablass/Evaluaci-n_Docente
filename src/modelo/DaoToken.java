@@ -13,16 +13,16 @@ public class DaoToken {
     ResultSet rs;
     Statement stm;
 
-    public boolean consultarToken(String token){
-        boolean respuesta = false;
+    public int consultarToken(String token){
+        int idGrupo = 0;
         try{
             con = ConexionBD.getConnection();
             stm = con.createStatement();
-            rs = stm.executeQuery("SELECT * FROM grupos");
+            PreparedStatement pstm = con.prepareStatement("SELECT * FROM grupos WHERE Token = ?");
+            pstm.setString(1, token);
+            rs = pstm.executeQuery();
             while(rs.next()){
-                if(token.equals(rs.getString("Token"))){
-                    respuesta = true;
-                }
+                idGrupo = rs.getInt("id_grupo");
             }
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -40,19 +40,20 @@ public class DaoToken {
                 ex.printStackTrace();
             }
         }
-        return respuesta;
+        return idGrupo;
     }
 
-    public String obtenerGrupo(String token){
-        String grupo = "";
+    public int consultarAlumno(int idGrupo, String correo){
+        int idAlumno = 0;
         try{
             con = ConexionBD.getConnection();
             stm = con.createStatement();
-            rs = stm.executeQuery("SELECT * FROM grupos");
+            PreparedStatement pstm = con.prepareStatement("SELECT Id FROM alumnos WHERE Id_grupo = ? AND correo = ?");
+            pstm.setInt(1, idGrupo);
+            pstm.setString(2, correo);
+            rs = pstm.executeQuery();
             while(rs.next()){
-                if(token.equals(rs.getString("Token"))){
-                    grupo = rs.getString("Id_nombre");
-                }
+                idAlumno = rs.getInt("Id");
             }
         }catch(SQLException ex){
             ex.printStackTrace();
@@ -70,15 +71,48 @@ public class DaoToken {
                 ex.printStackTrace();
             }
         }
-        return grupo;
+        return idAlumno;
     }
 
-    public boolean registroAlumno(String grupo, String correo){
+    public int consultarProgresoEncuesta(int idAlumno, int idPeriodo){
+        int index = 0;
+        try{
+            con = ConexionBD.getConnection();
+            stm = con.createStatement();
+            pstm = con.prepareStatement("SELECT COUNT(*) FROM evaluaciones WHERE Id_alumno = ? AND Id_periodo = ?");
+            pstm.setInt(1, idAlumno);
+            pstm.setInt(2, idPeriodo);
+            rs = pstm.executeQuery();
+            while(rs.next()){
+                index = rs.getInt(1);
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }finally{
+            try {
+                if (con != null)
+                    con.close();
+                if (stm != null)
+                    stm.close();
+                if (rs != null)
+                    rs.close();
+                if (pstm != null)
+                    pstm.close();
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+        }
+        return index;
+    }
+
+
+
+    public boolean registroAlumno(int idGrupo, String correo){
         boolean respuesta = false;
         try{
             con = ConexionBD.getConnection();
-            pstm = con.prepareStatement("INSERT INTO alumnos(Id_grupo, correo) VALUES(?,?)");
-            pstm.setString(1,grupo);
+            pstm = con.prepareStatement("INSERT INTO alumnos(Id_grupo, correo) VALUES(?, ?)");
+            pstm.setInt(1, idGrupo);
             pstm.setString(2, correo);
 
             respuesta = pstm.executeUpdate() == 1;
@@ -100,6 +134,43 @@ public class DaoToken {
         }
         return respuesta;
     }
+    //SELECT id FROM periodos WHERE estado = 1 AND CURRENT_DATE() BETWEEN Fecha_inicio AND Fecha_fin
+    public int consultarPeriodoActivo(){
+        int idPeriodo = 0;
+        try{
+            con = ConexionBD.getConnection();
+            stm = con.createStatement();
+            PreparedStatement pstm = con.prepareStatement("SELECT id FROM periodos WHERE estado = 1 AND CURRENT_DATE() BETWEEN Fecha_inicio AND Fecha_fin");
+            rs = pstm.executeQuery();
+            while(rs.next()){
+                idPeriodo = rs.getInt(1);
+            }
+        }catch(SQLException ex){
+            ex.printStackTrace();
+        }finally{
+            try {
+                if (con != null)
+                    con.close();
+                if (stm != null)
+                    stm.close();
+                if (rs != null)
+                    rs.close();
+                if (pstm != null)
+                    pstm.close();
+            }catch(Exception ex){
+                ex.printStackTrace();
+            }
+        }
+        return idPeriodo;
+    }
+    public static void main(String[] args){
+
+        DaoToken daTok = new DaoToken();
+        boolean respuesta = daTok.registroAlumno(5,"sdfadsfdfg");
+        System.out.println(respuesta);
+
+    }
+
 
 
 }

@@ -8,8 +8,19 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String context = request.getContextPath(); %>
 <%
+    int idGrupo = Integer.parseInt(request.getSession().getAttribute("idGrupo").toString());
     String token = (String)request.getAttribute("token");
     String correo = (String)request.getAttribute("correo");
+    int idAlumno = Integer.parseInt(request.getSession().getAttribute("idAlumno").toString());
+    int idPeriodo = Integer.parseInt(request.getSession().getAttribute("idPeriodo").toString());
+    int index = 0;
+    int indexP = Integer.parseInt(request.getSession().getAttribute("index").toString());
+    System.out.println(indexP);
+    if(indexP != 0){
+        index = Integer.parseInt(request.getSession().getAttribute("index").toString());
+    }else
+        index = 0;
+    System.out.println(index);
 %>
 <html>
 <head>
@@ -21,8 +32,12 @@
 
 
     <form action="<%=context%>/ServletCargaDatos" method="post">
+        <input name="index" type="hidden" value="<%=index%>">
+        <input name="idAlumno" type="hidden" value="<%=idAlumno%>">
         <input name="token" type="hidden" value="<%=token%>">
         <input name="correo" type="hidden" value="<%=correo%>">
+        <input name="idGrupo" type="hidden" value="<%=idGrupo%>">
+        <input name="idPeriodo" type="hidden" value="<%=idPeriodo%>">
         <button class="btn btn-success" type="submit">Iniciar Encuesta</button>
     </form>
 

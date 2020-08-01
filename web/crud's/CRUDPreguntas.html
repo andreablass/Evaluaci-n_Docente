@@ -2,16 +2,15 @@
   Created by IntelliJ IDEA.
   User: Esmeralda Lara
   Date: 23/07/2020
-  Time: 20:41
+  Time: 20:40
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String context = request.getContextPath();%>
-
 <html>
 
 <head>
-    <title>CRUDPeriodo</title>
+    <title>CRUDPreguntas</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -92,8 +91,9 @@
         </nav>
     </nav>
     <!-- FIN DEL NAV-->
+
     <center>
-        <div class="p-3 mb-2 bg-success ">PERIODOS</div>
+        <div class="p-3 mb-2 bg-success ">PREGUNTAS</div>
     </center>
 
     <!--Tabla -->
@@ -102,36 +102,36 @@
             <span class="border border-success"></span>
             <thead>
                 <tr>
-                    <th scope="col">Id Periodo</th>
-                    <th scope="col">Año</th>
-                    <th scope="col">Nombre</th>
+                    <th scope="col">Identificador de Pregunta</th>
+                    <th scope="col">Descripción</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th scope="row">1</th>
-                    <td>2000dc110</td>
-                    <td>1</td>
+                    <td>¿El o la Docente asistió regularmente a clase y fue puntual?</td>
+
                 </tr>
                 <tr>
                     <th scope="row">2</th>
-                    <td>2000dc110</td>
-                    <td>1</td>
+                    <td>¿Su forma de explicar proporcionó una idea clara del conocimiento profundo y actualizado sobre
+                        la materia y sirvió para vincular nuevos temas?</td>
                 </tr>
                 <tr>
                     <th scope="row">3</th>
-                    <td>2000dc110</td>
-                    <td>1</td>
+                    <td>@¿Abordó los temas estableciendo ejemplos prácticos o basados en situaciones reales que me
+                        permitieron aprender y desarrollar mi creatividad?</td>
                 </tr>
                 <tr>
                     <th scope="row">3</th>
-                    <td>2000dc110</td>
-                    <td>1</td>
+                    <td>¿Las actividades realizadas durante el curso en relación con el programa, mostraron organización
+                        y orden?</td>
                 </tr>
                 <tr>
                     <th scope="row">3</th>
-                    <td>2000dc110</td>
-                    <td>1</td>
+                    <td>¿Regresó tareas, trabajos, proyectos, exámenes etc. con comentarios que sirvieron de
+                        retroalimentación?</td>
                 </tr>
             </tbody>
         </table>
@@ -142,19 +142,16 @@
     <br />
 
     <div class="card-deck">
+        <!--Agregar-->
         <div class="card">
             <div class="card-body">
                 <form>
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Identificador de periodo</label>
+                        <label for="formGroupExampleInput">Identificador de pregunta</label>
                         <input type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="formGroupExampleInput2">Año</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput2">Nombre</label>
+                        <label for="formGroupExampleInput2">Descipción</label>
                         <input type="text" class="form-control">
                     </div>
                 </form>
@@ -163,19 +160,16 @@
                 <small class="text-muted"><button type="button" class="btn btn-outline-success">Agregar</button></small>
             </div>
         </div>
+        <!--Modificar-->
         <div class="card">
             <div class="card-body">
                 <form>
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Identificador de periodo</label>
+                        <label for="formGroupExampleInput">Identificador de pregunta</label>
                         <input type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="formGroupExampleInput2">Año</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput2">Nombre</label>
+                        <label for="formGroupExampleInput2">Descipción</label>
                         <input type="text" class="form-control">
                     </div>
                 </form>
@@ -189,7 +183,7 @@
             <div class="card-body">
                 <form>
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Identificador de periodo</label>
+                        <label for="formGroupExampleInput">Identificador de pregunta</label>
                         <input type="text" class="form-control">
                     </div>
                 </form>
@@ -199,8 +193,6 @@
             </div>
         </div>
     </div>
-
-    
 
 </body>
 
