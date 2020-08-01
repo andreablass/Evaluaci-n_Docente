@@ -2,30 +2,20 @@
     background-color:#132D5E;
 }
 .background{
-    background-image: linear-gradient( 109.6deg, rgba(211,211,211,1) 13.5%, rgba(255,255,255,1) 81.1% );
     background-image: linear-gradient( 125.8deg, rgba(245,247,250,1) 6.8%, rgba(184,198,219,1) 59.5% );
 }
 .p-3{
-    background-image: linear-gradient(109.6deg, rgb(95, 207, 128) 71.8%, rgb(118, 202, 155) 71.8%);
+    background-image: linear-gradient(109.6deg, rgb(95, 207, 128) 71.8%, rgb(60, 126, 88) 71.8%);
    
 }
-.card{
-    background-image: linear-gradient(to right,#6695c1, #68e2ba);;
-    
-}3
+
 
 input:hover{
     background-color: aliceblue;
     border-color: aqua;
 }
 
-.comienzaEncuesta{
-    background-image: radial-gradient( circle farthest-corner at 10% 20%, rgba(78,157,84,1) 0%, rgba(40,62,108,1) 100.2% );
-    border-radius: 4cm;
-    height:2cm;
-    width: 5cm;
-}
-.comienzaEncuesta:hover{
-    background-image: linear-gradient(to right,#23b298, #b3c4fc);
-    
+select:hover{
+    border-top-color: #6695c1;
+    background-color: rgb(238, 236, 232);
 }

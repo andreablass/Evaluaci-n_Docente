@@ -135,6 +135,7 @@
                 </tr>
             </tbody>
         </table>
+        <!--FIN DE TABLA-->
     </center>
 
     <br />
@@ -143,55 +144,92 @@
 
     <div class="card-deck">
         <!--Agregar-->
-        <div class="card">
+        <div class="card" style="height: 7cm; width: 3%; background-color: #132D5E;">
+            <font color="white">
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">IDENTIFICADOR DE PREGUNTA</label>
+                            <input type="text" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput2">DESCRIPCIÓN</label>
+                            <input type="text" class="form-control">
+                        </div>
+            </font>
+            </form>
+        </div>
+
+        <div class="card-footer">
+            <small class="text-muted"><button type="button" class="btn btn-outline-success">AGREGAR</button></small>
+        </div>
+    </div>
+    <!--Modificar-->
+    <div>
+        <!--Modificar un campo-->
+        <div class="card" style="background-color: #132D5E;">
+            <font color="white">
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="formGroupExampleInput">IDENTIFICADOR DE PREGUNTA</label>
+                            <input type="text" class="form-control">
+                            <label for="formGroupExampleInput">CAMPO A MODIFICAR</label>
+                            </br>
+                            <select name="pregunta" id="idPregunta">
+                                <option value=""></option>
+                                <option value="idPregunta">IDENTIFICADOR DE PREGUNTA</option>
+                                <option value="descripcion">DESCRIPCIÓN</option>
+                            </select>
+                            </br>
+                            <label for="formGroupExampleInput">AGREGAR NUEVO CAMPO</label>
+                            <input type="text" class="form-control">
+                        </div>
+            </font>
+            </form>
+        </div>
+        <div class="card-footer">
+            <small class="text-muted"><button type="button" class="btn btn-outline-warning">MODIFICAR</button></small>
+        </div>
+    </div>
+    </br>
+    <!--Modificar todo-->
+    <div class="card" style="background-color: #132D5E;">
+        <font color="white">
             <div class="card-body">
                 <form>
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Identificador de pregunta</label>
+                        <label for="formGroupExampleInput">IDENTIFICADOR DE PREGUNTA</label>
                         <input type="text" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="formGroupExampleInput2">Descipción</label>
+                        <label for="formGroupExampleInput2">DESCRIPCIÓN</label>
                         <input type="text" class="form-control">
                     </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted"><button type="button" class="btn btn-outline-success">Agregar</button></small>
-            </div>
-        </div>
-        <!--Modificar-->
-        <div class="card">
+        </font>
+        </form>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted"><button type="button" class="btn btn-outline-warning">MODIFICAR</button></small>
+    </div>
+    </div>
+    </div>
+    <!--Eliminar-->
+    <div class="card" style="height: 7cm; width: 3%; background-color: #132D5E;">
+        <font color="white">
             <div class="card-body">
                 <form>
                     <div class="form-group">
-                        <label for="formGroupExampleInput">Identificador de pregunta</label>
+                        <label for="formGroupExampleInput">IDENTIFICADOR DE PREGUNTA</label>
                         <input type="text" class="form-control">
                     </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput2">Descipción</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted"><button type="button"
-                        class="btn btn-outline-warning">Modificar</button></small>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Identificador de pregunta</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted"><button type="button" class="btn btn-outline-danger">Eliminar</button></small>
-            </div>
-        </div>
+        </font>
+        <form>
+    </div>
+    <div class="card-footer">
+        <small class="text-muted"><button type="button" class="btn btn-outline-danger">ELIMINAR</button></small>
+    </div>
+    </div>
     </div>
 
 </body>
