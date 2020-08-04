@@ -31,9 +31,14 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/estilosDeInterfaces.css">
+
 </head>
 <body>
 <div class="container col-md-10 offset-md-1">
+    <center>
+        <div class="p-3 mb-2 bg-success ">EVALUACIÓN</div>
+    </center>
 
     <form action="<%=context%>/ServletRegistroRespuestas" method="POST">
         <input name="idAlumno" type="hidden" value="<%=idAlumno%>">
@@ -44,8 +49,7 @@
         <input id="inputNumPreguntas" type="hidden" value="<%=NumPreguntas%>">
         <p id="envioPuntuacion"></p>
         <div class="col-md-12">
-        <table class="table table-bordered table-striped table-hover table-center"
-               style="background-color:#5ED7A2;">
+        <table class="table table-bordered table-striped table-hover table-center" style="background-image: linear-gradient( 89.8deg, rgba(74,140,203,1) 10.9%, rgba(74,203,138,1) 78.9% );">
             <h4>
                 <%=docentes.get(docenteCounter).getNombre()%> <%=docentes.get(docenteCounter).getApellido1()%>
                 <%=docentes.get(docenteCounter).getApellido2()%>
@@ -107,7 +111,7 @@
                 count++;
                 } %>
         </table>
-            <div><button id="btnSumar" class="btn btn-danger btn-lg btn-block"><h2>Evaluar</h2></button></div>
+            <div><button id="btnSumar" class="btn btn-danger btn-lg btn-block" style="background-color: #132D5E;"><h2>EVALUAR</h2></button></div>
     </div>
 
     </form>

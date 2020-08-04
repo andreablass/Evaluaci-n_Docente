@@ -7,15 +7,18 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <% String context = request.getContextPath();%>
+
 <html>
 <head>
-    <title>CRUDAdministrador</title>
+    <title>CRUDGrupo</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/estilosDeInterfaces.css">
 
 </head>
+<body class="background">
+
 <!-- COMIENZO DEL NAV-->
 <nav class="navbar navbar-dark ">
     <nav class="navbar navbar-expand-lg ">
@@ -86,59 +89,41 @@
     </nav>
 </nav>
 <!-- FIN DEL NAV-->
-<center><div class="p-3 mb-2 bg-success ">PREGUNTAS</div></center>
 
-<!--Tabla -->
-<center>
-    <table class="table table-hover">
-        <span class="border border-success"></span>
-        <thead>
-        <tr>
-            <th scope="col">Identificador de Administrador</th>
-            <th scope="col">Nombre de usuario</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido Paterno</th>
-            <th scope="col">Apellido Materno</th>
-            <th scope="col">Contraseña</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>fat</td>
-            <td>fat</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>fat</td>
-            <td>fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>fat</td>
-            <td>fat</td>
-            <td>fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>fat</td>
-            <td>fat</td>
-            <td>fat</td>
-        </tr>
-        </tbody>
-    </table>
-</center>
-
+<center><div class="p-3 mb-2 bg-success ">GRUPO</div></center>
+<!-- Tabla -->
+<table class="table table-hover">
+    <span class="border border-success"></span>
+    <thead>
+    <tr>
+        <th scope="col">Identificador de Grupo</th>
+        <th scope="col">Token</th>
+        <th scope="col">Número de alumnos</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+    </tr>
+    <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td>Larry the Bird</td>
+        <td>@twitter</td>
+    </tr>
+    <tr>
+        <th scope="row">3</th>
+        <td>Larry the Bird</td>
+        <td>@twitter</td>
+    </tr>
+    </tbody>
+</table>
 <br/>
 <br/>
 <br/>
@@ -148,28 +133,16 @@
         <div class="card-body">
             <form>
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Identificador de Administrador</label>
-                    <input type="text" class="form-control"  >
+                    <label for="formGroupExampleInput">Identificador de Grupo</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput">
                 </div>
                 <div class="form-group">
-                    <label for="formGroupExampleInput2">Nombre de usuario</label>
-                    <input type="text" class="form-control" >
+                    <label for="formGroupExampleInput2">Token</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2" >
                 </div>
                 <div class="form-group">
-                    <label for="formGroupExampleInput2">Nombre</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Apellido Paterno</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Apellido Materno</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Contraseña</label>
-                    <input type="text" class="form-control" >
+                    <label for="formGroupExampleInput2">Número de alumnos</label>
+                    <input type="text" class="form-control">
                 </div>
             </form>
         </div>
@@ -181,28 +154,16 @@
         <div class="card-body">
             <form>
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Identificador de Administrador</label>
-                    <input type="text" class="form-control"  >
+                    <label for="formGroupExampleInput">Identificador de Grupo</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput">
                 </div>
                 <div class="form-group">
-                    <label for="formGroupExampleInput2">Nombre de usuario</label>
-                    <input type="text" class="form-control" >
+                    <label for="formGroupExampleInput2">Token</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2" >
                 </div>
                 <div class="form-group">
-                    <label for="formGroupExampleInput2">Nombre</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Apellido Paterno</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Apellido Materno</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Contraseña</label>
-                    <input type="text" class="form-control" >
+                    <label for="formGroupExampleInput2">Número de alumnos</label>
+                    <input type="text" class="form-control">
                 </div>
             </form>
         </div>
@@ -214,8 +175,8 @@
         <div class="card-body">
             <form>
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Identificador de Administrador</label>
-                    <input type="text" class="form-control"  >
+                    <label for="formGroupExampleInput">Identificador de Grupo</label>
+                    <input type="text" class="form-control">
                 </div>
             </form>
         </div>
@@ -224,7 +185,6 @@
         </div>
     </div>
 </div>
-
 
 
 </body>
