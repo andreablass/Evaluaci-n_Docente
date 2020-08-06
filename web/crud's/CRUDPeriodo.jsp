@@ -1,3 +1,7 @@
+<%@ page import="bean.BeanPeriodo" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="bean.BeanAdministrador" %>
 <%--
   Created by IntelliJ IDEA.
   User: Esmeralda Lara
@@ -6,202 +10,148 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% String context = request.getContextPath();%>
+<%
+    String context = request.getContextPath();
+
+    List<BeanPeriodo> periodos = new ArrayList<>();
+    if(request.getSession().getAttribute("periodos") != null){
+        periodos = (List)request.getSession().getAttribute("periodos");
+    }
+
+    BeanAdministrador user = new BeanAdministrador();
+    if (request.getSession().getAttribute("user") != null) {
+        user = (BeanAdministrador) request.getSession().getAttribute("user");
+    }
+%>
 
 <html>
 
 <head>
-    <title>CRUDPeriodo</title>
+    <title>Periodos</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/estilosDeInterfaces.css">
-
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 </head>
 
-<body class="background">
+<body>
+<jsp:include page="headerMenu.jsp"/>
 
-    <!-- COMIENZO DEL NAV-->
-    <nav class="navbar navbar-dark ">
-        <nav class="navbar navbar-expand-lg ">
-            <a class="navbar-brand" href="#">EDI_UTEZ</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <center>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item active">
+<center>
+    <div class="p-3 mb-2 bg-success text-white">Periodos</div>
+</center>
 
-                            <a class="nav-link" href="#"> <b>Inicio</b><span class="sr-only">(current)</span></a>
-                        </li>
+<!--Tabla -->
+<center>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Id Periodo</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Fecha inicio</th>
+            <th scope="col">Fecha fin</th>
+            <th scope="col">Estado</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for(BeanPeriodo periodo: periodos){ %>
+        <tr>
+            <th scope="row"><%=periodo.getId()%></th>
+            <td><%=periodo.getNombre()%></td>
+            <td><%=periodo.getFecha_inicio()%></td>
+            <td><%=periodo.getFecha_fin()%></td>
+            <%if(periodo.getEstado()==1){%>
+            <td>Activo</td>
+            <%} else {%>
+            <td>Inactivo</td>
+            <%}%>
+        </tr>
+        <% } %>
+        </tbody>
+    </table>
+</center>
 
-                        <li class="nav-item">
-                            <!--Docentes-->
-                            <form action="<%=context%>/crud's/CRUDDocente.jsp">
-                                <button type="submit" class="navbar btn-primary" id="Docentes" value="Docentes"
-                                    style="border: none;">Docentes</button>
-                            </form>
-                        </li>
-
-                        <li class="nav-item">
-                            <!--Grupos-->
-                            <form action="<%=context%>/crud's/CRUDGrupo.jsp">
-                                <button type="submit" class="navbar btn-primary" style="border: none;" id="Grupos"
-                                    value="Grupos">Grupos</button>
-                            </form>
-                        </li>
-
-                        <li class="nav-item">
-                            <!--Evaluación-->
-                            <form action="<%=context%>/crud's/CRUDPreguntas.jsp">
-                                <button type="submit" class="navbar  btn-primary" style="border: none;" id="Evaluacion"
-                                    value="Evaluacion">Evaluacion</button>
-                            </form>
-                        </li>
-
-                        <li class="nav-item">
-                            <!--Periodos-->
-                            <form action="<%=context%>/crud's/CRUDPeriodo.jsp">
-                                <button type="submit" class="navbar  btn-primary" style="border: none;" id="Periodos"
-                                    value="Periodos">Periodos</button>
-                            </form>
-                        </li>
-
-                        <li class="nav-item">
-                            <!--Reportes-->
-                            <form action="<%=context%>/crud's/CRUDReporte.jsp">
-                                <button type="submit" class="navbar  btn-primary" style="border: none;" id="Reportes"
-                                    value="Reportes">Reportes</button>
-                            </form>
-                        </li>
-
-                        <li class="nav-item">
-                            <!--Administradores-->
-                            <form action="<%=context%>/crud's/CRUDAdministrador.jsp">
-                                <button type="submit" class="navbar  btn-primary" style="border: none;"
-                                    id="Administradores" value="Administradores">Administradores</button>
-                            </form>
-                        </li>
-
-                    </ul>
+<br />
+<br />
+<br />
+<% if(user.getTipo() == 1){ %>
+<div class="card-deck">
+    <div class="card">
+        <div class="card-body">
+            <form action="<%=context%>/ServletPeriodo">
+                <h1>Agregar</h1>
+                <input name="opcion" type="hidden" value="agregar">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input name="nombre" type="text" class="form-control">
                 </div>
-            </center>
-        </nav>
-    </nav>
-    <!-- FIN DEL NAV-->
-    <center>
-        <div class="p-3 mb-2 bg-success ">PERIODOS</div>
-    </center>
-
-    <!--Tabla -->
-    <center>
-        <table class="table table-hover">
-            <span class="border border-success"></span>
-            <thead>
-                <tr>
-                    <th scope="col">Id Periodo</th>
-                    <th scope="col">Año</th>
-                    <th scope="col">Nombre</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>2000dc110</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>2000dc110</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>2000dc110</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>2000dc110</td>
-                    <td>1</td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>2000dc110</td>
-                    <td>1</td>
-                </tr>
-            </tbody>
-        </table>
-    </center>
-
-    <br />
-    <br />
-    <br />
-
-    <div class="card-deck">
-        <div class="card">
-            <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Identificador de periodo</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput2">Año</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput2">Nombre</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted"><button type="button" class="btn btn-outline-success">Agregar</button></small>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Identificador de periodo</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput2">Año</label>
-                        <input type="text" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput2">Nombre</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted"><button type="button"
-                        class="btn btn-outline-warning">Modificar</button></small>
-            </div>
-        </div>
-        <div class="card">
-            <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Identificador de periodo</label>
-                        <input type="text" class="form-control">
-                    </div>
-                </form>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted"><button type="button" class="btn btn-outline-danger">Eliminar</button></small>
-            </div>
+                <div class="form-group">
+                    <label>Fecha inicio</label>
+                    <input name="fecha_inicio" type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Fecha fin</label>
+                    <input name="fecha_fin" type="date" class="form-control">
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted"><button type="submit" class="btn btn-outline-success">Agregar</button></small>
+                </div>
+            </form>
         </div>
     </div>
-
-    
-
+    <div class="card">
+        <div class="card-body">
+            <!--MODIFICAR-->
+            <form action="<%=context%>/ServletPeriodo">
+                <h1>Modificar</h1>
+                <input name="opcion" type="hidden" value="modificar">
+                <div class="form-group">
+                    <label>Identificador de periodo</label>
+                    <input name="id" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input name="nombre" type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Fecha inicio</label>
+                    <input name="fecha_inicio" type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Fecha fin</label>
+                    <input name="fecha_fin" type="date" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Estado</label>
+                    <select name="estado" class="form-control">
+                        <option value="1">Activo</option>
+                        <option value="0">Inactivo</option>
+                    </select>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted"><button type="submit" class="btn btn-outline-warning">Modificar</button></small>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <form action="<%=context%>/ServletPeriodo" method="POST">
+                <h1>Eliminar</h1>
+                <input name="opcion" type="hidden" value="eliminar">
+                <div class="form-group">
+                    <label>Identificador de periodo</label>
+                    <input name="id" type="text" class="form-control">
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted"><button type="submit" class="btn btn-outline-danger">Eliminar</button></small>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<% } %>
 </body>
-
 </html>
+
+

@@ -1,4 +1,6 @@
-<%--
+<%@ page import="bean.BeanAdministrador" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Esmeralda Lara
   Date: 23/07/2020
@@ -6,92 +8,36 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<% String context = request.getContextPath();%>
+<%
+    String context = request.getContextPath();
+
+    List<BeanAdministrador> administradores = new ArrayList<>();
+    if(request.getSession().getAttribute("administradores") != null){
+        administradores = (List<BeanAdministrador>) request.getSession().getAttribute("administradores");
+    }
+
+    BeanAdministrador user = new BeanAdministrador();
+    if (request.getSession().getAttribute("user") != null) {
+        user = (BeanAdministrador) request.getSession().getAttribute("user");
+    }
+ %>
 <html>
 <head>
-    <title>CRUDAdministrador</title>
+    <title>Administradores</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/estilosDeInterfaces.css">
-
 </head>
-<!-- COMIENZO DEL NAV-->
-<nav class="navbar navbar-dark ">
-    <nav class="navbar navbar-expand-lg ">
-        <a class="navbar-brand" href="#">EDI_UTEZ</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <center>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                <ul class="navbar-nav">
-                    <li class="nav-item active">
+<body>
 
-                        <a class="nav-link" href="#"> <b>Inicio</b><span class="sr-only">(current)</span></a>
-                    </li>
+<jsp:include page="headerMenu.jsp"/>
 
-                    <li class="nav-item">
-                        <!--Docentes-->
-                        <form action="<%=context%>/crud's/CRUDDocente.jsp">
-                            <button type="submit" class="navbar btn-primary" id="Docentes" value="Docentes"
-                                style="border: none;">Docentes</button>
-                        </form>
-                    </li>
 
-                    <li class="nav-item">
-                        <!--Grupos-->
-                        <form action="<%=context%>/crud's/CRUDGrupo.jsp">
-                            <button type="submit" class="navbar btn-primary" style="border: none;" id="Grupos"
-                                value="Grupos">Grupos</button>
-                        </form>
-                    </li>
-
-                    <li class="nav-item">
-                        <!--Evaluación-->
-                        <form action="<%=context%>/crud's/CRUDPreguntas.jsp">
-                            <button type="submit" class="navbar  btn-primary" style="border: none;" id="Evaluacion"
-                                value="Evaluacion">Evaluacion</button>
-                        </form>
-                    </li>
-
-                    <li class="nav-item">
-                        <!--Periodos-->
-                        <form action="<%=context%>/crud's/CRUDPeriodo.jsp">
-                            <button type="submit" class="navbar  btn-primary" style="border: none;" id="Periodos"
-                                value="Periodos">Periodos</button>
-                        </form>
-                    </li>
-
-                    <li class="nav-item">
-                        <!--Reportes-->
-                        <form action="<%=context%>/crud's/CRUDReporte.jsp">
-                            <button type="submit" class="navbar  btn-primary" style="border: none;" id="Reportes"
-                                value="Reportes">Reportes</button>
-                        </form>
-                    </li>
-
-                    <li class="nav-item">
-                        <!--Administradores-->
-                        <form action="<%=context%>/crud's/CRUDAdministrador.jsp">
-                            <button type="submit" class="navbar  btn-primary" style="border: none;"
-                                id="Administradores" value="Administradores">Administradores</button>
-                        </form>
-                    </li>
-
-                </ul>
-            </div>
-        </center>
-    </nav>
-</nav>
-<!-- FIN DEL NAV-->
-<center><div class="p-3 mb-2 bg-success ">PREGUNTAS</div></center>
+<center><div class="p-3 mb-2 bg-success text-white">Administradores</div></center>
 
 <!--Tabla -->
 <center>
     <table class="table table-hover">
-        <span class="border border-success"></span>
         <thead>
         <tr>
             <th scope="col">Identificador de Administrador</th>
@@ -103,38 +49,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>fat</td>
-            <td>fat</td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td>fat</td>
-            <td>fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>fat</td>
-            <td>fat</td>
-            <td>fat</td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>fat</td>
-            <td>fat</td>
-            <td>fat</td>
-        </tr>
+            <% for(BeanAdministrador administrador: administradores){ %>
+            <tr>
+                <th scope="row"><%=administrador.getId()%></th>
+                <td><%=administrador.getNombreUsuario()%></td>
+                <td><%=administrador.getNombre()%></td>
+                <td><%=administrador.getApellido1()%></td>
+                <td><%=administrador.getApellido2()%></td>
+
+                <% if(administrador.getTipo() == 1){%>
+                 <td>Super</td>
+                <%} else {%>
+                 <td>Solo lectura</td>
+                <%}%>
+            </tr>
+            <% } %>
         </tbody>
     </table>
 </center>
@@ -142,91 +71,108 @@
 <br/>
 <br/>
 <br/>
-
+<% if(user.getTipo() == 1){ %>
 <div class="card-deck">
     <div class="card">
-        <div class="card-body">
-            <form>
-                <div class="form-group">
-                    <label for="formGroupExampleInput">Identificador de Administrador</label>
-                    <input type="text" class="form-control"  >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Nombre de usuario</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Nombre</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Apellido Paterno</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Apellido Materno</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Contraseña</label>
-                    <input type="text" class="form-control" >
-                </div>
-            </form>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted"><button type="button" class="btn btn-outline-success">Agregar</button></small>
-        </div>
+        <form action="<%=context%>/ServletAdministrador" method="post">
+            <div class="card-body">
+                    <input name="opcion" type="hidden" value="agregar">
+                    <div class="form-group">
+                        <label for="nombreUsuario">Nombre de usuario</label>
+                        <input id="nombreUsuario" name="nombreUsuario" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input id="nombre" name="nombre" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido1">Apellido Paterno</label>
+                        <input id="apellido1" name="apellido1" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido2">Apellido Materno</label>
+                        <input id="apellido2" name="apellido2" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input id="password" name="password" type="password" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" name="tipo" class="form-control" >
+                            <option value="1">Super</option>
+                            <option value="2">Solo lectura</option>
+                        </select>
+                    </div>
+
+            </div>
+            <div class="card-footer">
+                <small class="text-muted"><button type="submit" class="btn btn-outline-success">Agregar</button></small>
+            </div>
+        </form>
     </div>
     <div class="card">
         <div class="card-body">
-            <form>
-                <div class="form-group">
-                    <label for="formGroupExampleInput">Identificador de Administrador</label>
-                    <input type="text" class="form-control"  >
+            <form action="<%=context%>/ServletAdministrador" method="post">
+                <div class="card-body">
+                    <input name="opcion" type="hidden" value="modificar">
+                    <div class="form-group">
+                        <label for="id">Id de usuario</label>
+                        <input id="id" name="id" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="nombreUsuario">Nombre de usuario</label>
+                        <input id="nombreUsuario" name="nombreUsuario" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input id="nombre" name="nombre" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido1">Apellido Paterno</label>
+                        <input id="apellido1" name="apellido1" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="apellido2">Apellido Materno</label>
+                        <input id="apellido2" name="apellido2" type="text" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input id="password" name="password" type="password" class="form-control" >
+                    </div>
+                    <div class="form-group">
+                        <label for="tipo">Tipo</label>
+                        <select id="tipo" name="tipo" class="form-control" >
+                            <option value="1">Super</option>
+                            <option value="2">Solo lectura</option>
+                        </select>
+                    </div>
+
                 </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Nombre de usuario</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Nombre</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Apellido Paterno</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Apellido Materno</label>
-                    <input type="text" class="form-control" >
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput2">Contraseña</label>
-                    <input type="text" class="form-control" >
+                <div class="card-footer">
+                    <small class="text-muted"><button type="submit" class="btn btn-outline-warning">Modificar</button></small>
                 </div>
             </form>
-        </div>
-        <div class="card-footer">
-            <small class="text-muted"><button type="button" class="btn btn-outline-warning">Modificar</button></small>
         </div>
     </div>
     <div class="card">
-        <div class="card-body">
-            <form>
+        <form action="<%=context%>/ServletAdministrador" method="post">
+            <div class="card-body">
+                <input name="opcion" type="hidden" value="eliminar">
+
                 <div class="form-group">
-                    <label for="formGroupExampleInput">Identificador de Administrador</label>
-                    <input type="text" class="form-control"  >
+                    <label for="id">Identificador de Administrador</label>
+                    <input id="id" name="id" type="text" class="form-control"  >
                 </div>
-            </form>
+
         </div>
         <div class="card-footer">
-            <small class="text-muted"><button type="button" class="btn btn-outline-danger">Eliminar</button></small>
+            <small class="text-muted"><button type="submit" class="btn btn-outline-danger">Eliminar</button></small>
         </div>
+        </form>
     </div>
 </div>
-
-
-
+<% } %>
 </body>
 </html>
 

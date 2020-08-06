@@ -1,9 +1,10 @@
 package servlet;
 
-import modelo.BeanDocente;
-import modelo.BeanPregunta;
-import modelo.DaoDocente;
-import modelo.DaoPregunta;
+import bean.BeanDocente;
+import bean.BeanPregunta;
+import dao.DaoDocente;
+import dao.DaoPregunta;
+import dao.DaoToken;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,22 +32,23 @@ public class ServletCargaDatos extends HttpServlet {
         List<BeanPregunta> preguntasN = DaoPre.consultarPreguntas();
         List<BeanPregunta> preguntasC = DaoPre.consultarComentarios();
 
-        //OBTENCION DOCENTES
-
-        //CONSERVA DE DATOS
+        //CONSERVAR DE DATOS
         int idGrupo = Integer.parseInt(request.getParameter("idGrupo"));
         int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));
         int idPeriodo = Integer.parseInt(request.getParameter("idPeriodo"));
         int index = 0;
+
+        //OBTENCION DOCENTES
         DaoDocente daoDoc = new DaoDocente();
         List<BeanDocente> docentesX = daoDoc.consultarDocentesGrupo(idGrupo);
-        //INSERCION DE DATOS
+
         request.setAttribute("docentes", docentesX);
         request.setAttribute("preguntasN", preguntasN);
         request.setAttribute("preguntasC", preguntasC);
         request.setAttribute("idAlumno", idAlumno);
         request.setAttribute("idGrupo", idGrupo);
         request.setAttribute("idPeriodo", idPeriodo);
+
         if(request.getParameter("index") == null){
             request.setAttribute("index", index);
             request.getRequestDispatcher("/view/encuesta.jsp").forward(request, response);
@@ -57,6 +59,8 @@ public class ServletCargaDatos extends HttpServlet {
             if(index < docentesX.size()){
                 request.getRequestDispatcher("/view/encuesta.jsp").forward(request, response);
             }else{
+                DaoToken daoToken = new DaoToken();
+                daoToken.actualizarEncuestaCompletada(idGrupo);
                 request.getRequestDispatcher("/view/terminarEncuesta.jsp").forward(request, response);
             }
         }

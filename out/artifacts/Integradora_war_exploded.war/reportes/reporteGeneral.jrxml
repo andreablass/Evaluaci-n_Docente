@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="reporteGeneral" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="77ff7ad0-343e-41da-8b35-719ce825e388">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="EvaluacionDocente"/>
+	<parameter name="idPeriodo" class="java.lang.Integer"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT AVG(ev.promedio) AS promedio, m.Id_Matricula, m.Nombre, m.Apellido1, m. Apellido2, ev.Id_periodo, p.nombre AS nombre_periodo, ev.Num_preguntas AS num_preguntas, COUNT(ev.Id_maestro) AS num_alumnos  FROM evaluaciones ev, maestros m, periodos p WHERE ev.Id_maestro=m.Id_Matricula AND p.id=ev.Id_periodo AND ev.id_periodo= $P{idPeriodo}  GROUP BY Id_maestro, ev.Num_preguntas ORDER BY promedio DESC ;]]>
+	</queryString>
+	<field name="promedio" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="promedio"/>
+	</field>
+	<field name="Id_Matricula" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Id_Matricula"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="maestros"/>
+	</field>
+	<field name="Nombre" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Nombre"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="maestros"/>
+	</field>
+	<field name="Apellido1" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Apellido1"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="maestros"/>
+	</field>
+	<field name="Apellido2" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="Apellido2"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="maestros"/>
+	</field>
+	<field name="Id_periodo" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="Id_periodo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="evaluaciones"/>
+	</field>
+	<field name="nombre_periodo" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="nombre_periodo"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="periodos"/>
+	</field>
+	<field name="num_preguntas" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="num_preguntas"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="evaluaciones"/>
+	</field>
+	<field name="num_alumnos" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="num_alumnos"/>
+	</field>
+	<group name="Id_Matricula">
+		<groupExpression><![CDATA[$F{Id_Matricula}]]></groupExpression>
+	</group>
+	<group name="num_preguntas">
+		<groupExpression><![CDATA[$F{num_preguntas}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="550" height="30" forecolor="#1A52BA" uuid="ac12f425-bcaf-4da7-b527-e83562535f65"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Prevaluación Docente DATIC]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="130" y="60" width="250" height="20" uuid="98a4e2f3-fe6c-41ef-a3aa-6814eb97dc3e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre_periodo}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="60" width="130" height="20" forecolor="#1A52BA" uuid="b2461fd4-78dd-4bbd-ae3e-cbc47c1c401e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Periodo evaluado: ]]></text>
+			</staticText>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="380" y="60" width="171" height="20" uuid="546f600f-63af-4732-ba46-d5212731161f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="36" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="2" y="6" width="260" height="30" forecolor="#FCFAFA" backcolor="#25B867" uuid="b5474e4e-a50a-44a3-8e1c-2356ad9c8cb8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a287a1c7-b6ce-4b43-968f-d297f69ee80e"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#1247B8"/>
+					<leftPen lineWidth="1.0" lineColor="#1247B8"/>
+					<bottomPen lineWidth="1.0" lineColor="#1247B8"/>
+					<rightPen lineWidth="1.0" lineColor="#1247B8"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="262" y="6" width="100" height="30" forecolor="#FCFAFA" backcolor="#25B867" uuid="384778c3-e6dc-4fc6-88b5-69a227becaa7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="629cc533-3710-4a1d-afe8-64416ea96af0"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#1247B8"/>
+					<leftPen lineWidth="1.0" lineColor="#1247B8"/>
+					<bottomPen lineWidth="1.0" lineColor="#1247B8"/>
+					<rightPen lineWidth="1.0" lineColor="#1247B8"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No. preguntas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="362" y="6" width="100" height="30" forecolor="#FCFAFA" backcolor="#25B867" uuid="3e00612e-e6ba-4a98-af9a-df37c70909a9">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="629cc533-3710-4a1d-afe8-64416ea96af0"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#1247B8"/>
+					<leftPen lineWidth="1.0" lineColor="#1247B8"/>
+					<bottomPen lineWidth="1.0" lineColor="#1247B8"/>
+					<rightPen lineWidth="1.0" lineColor="#1247B8"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[No. alumnos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="462" y="6" width="90" height="30" forecolor="#FCFAFA" backcolor="#25B867" uuid="91bbe901-122e-4d66-8343-c709968ba773">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43e99939-79f8-42ae-8ddb-b4b1368bf481"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#1247B8"/>
+					<leftPen lineWidth="1.0" lineColor="#1247B8"/>
+					<bottomPen lineWidth="1.0" lineColor="#1247B8"/>
+					<rightPen lineWidth="1.0" lineColor="#1247B8"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Promedio]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="2" y="0" width="260" height="30" uuid="4d9c3d4d-af9c-453f-bf2a-ce3245331e00">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a287a1c7-b6ce-4b43-968f-d297f69ee80e"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#1247B8"/>
+					<leftPen lineWidth="1.0" lineColor="#1247B8"/>
+					<bottomPen lineWidth="1.0" lineColor="#1247B8"/>
+					<rightPen lineWidth="1.0" lineColor="#1247B8"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{Nombre} +" "+$F{Apellido1}+" "+$F{Apellido2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="262" y="0" width="100" height="30" uuid="77e510c7-4c8c-448e-ad5f-b48e30eea4fc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="629cc533-3710-4a1d-afe8-64416ea96af0"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#1247B8"/>
+					<leftPen lineWidth="1.0" lineColor="#1247B8"/>
+					<bottomPen lineWidth="1.0" lineColor="#1247B8"/>
+					<rightPen lineWidth="1.0" lineColor="#1247B8"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{num_preguntas}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="362" y="0" width="100" height="30" uuid="a16c575f-41c9-41d9-a59d-d71cec9a1790">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fb402add-2519-41fb-bcb3-e31144dcc0a0"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#1247B8"/>
+					<leftPen lineWidth="1.0" lineColor="#1247B8"/>
+					<bottomPen lineWidth="1.0" lineColor="#1247B8"/>
+					<rightPen lineWidth="1.0" lineColor="#1247B8"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{num_alumnos}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,###.00#">
+				<reportElement x="462" y="0" width="90" height="30" uuid="695c67b7-adf8-4ffb-87ee-7ffc0087a375">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="43e99939-79f8-42ae-8ddb-b4b1368bf481"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineColor="#1247B8"/>
+					<leftPen lineWidth="1.0" lineColor="#1247B8"/>
+					<bottomPen lineWidth="1.0" lineColor="#1247B8"/>
+					<rightPen lineWidth="1.0" lineColor="#1247B8"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{promedio}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="480" y="0" width="76" height="20" uuid="5dea15b3-16a0-420d-8aa3-e30d6aca7bf7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

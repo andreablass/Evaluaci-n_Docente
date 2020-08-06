@@ -1,6 +1,6 @@
 package servlet;
 
-import modelo.DaoToken;
+import dao.DaoToken;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,6 +20,9 @@ public class ServletValidarAlum extends HttpServlet {
         atenderPeticion(request, response);
     }
     public void atenderPeticion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
         DaoToken daoTok = new DaoToken();
         int idPeriodo = daoTok.consultarPeriodoActivo();
 
@@ -47,21 +50,25 @@ public class ServletValidarAlum extends HttpServlet {
                     //COMPROBACION SI EL ALUMNO CONTESTO PREVIAS ENCUESTAS
                     int idAlumno = daoTok.consultarAlumno(idGrupo, correo);
                     if(idAlumno == 0) {
-                        boolean registrado = daoTok.registroAlumno(idGrupo, correo);
-                        if (registrado) {
-                            int index = 0;
-                            request.getSession().setAttribute("index", index);
-                            System.out.println(index);
-                            request.getSession().setAttribute("idAlumno", daoTok.consultarAlumno(idGrupo, correo));
-                            request.getSession().setAttribute("correo", correo);
-                            request.getSession().setAttribute("idGrupo", idGrupo);
-                            request.getSession().setAttribute("idPeriodo", idPeriodo);
-                            request.getRequestDispatcher("/view/inicioEncuesta.jsp").forward(request, response);
-                        } else
+                        boolean grupoCompleto = daoTok.consultarGrupoCompletado(idGrupo);
+                        if (!grupoCompleto) {
+                            boolean registrado = daoTok.registroAlumno(idGrupo, correo);
+                            if (registrado) {
+                                daoTok.actualizarGrupoAlumno(idGrupo);
+                                int index = 0;
+                                request.getSession().setAttribute("index", index);
+                                request.getSession().setAttribute("idAlumno", daoTok.consultarAlumno(idGrupo, correo));
+                                request.getSession().setAttribute("correo", correo);
+                                request.getSession().setAttribute("idGrupo", idGrupo);
+                                request.getSession().setAttribute("idPeriodo", idPeriodo);
+                                request.getRequestDispatcher("/view/inicioEncuesta.jsp").forward(request, response);
+                            } else
+                                request.getRequestDispatcher("/index.jsp").forward(request, response);
+                        }else{
                             request.getRequestDispatcher("/index.jsp").forward(request, response);
+                        }
                     }else{
                         request.getSession().setAttribute("index", daoTok.consultarProgresoEncuesta(idAlumno, idPeriodo));
-                        System.out.println(daoTok.consultarProgresoEncuesta(idAlumno, idPeriodo));
                         request.getSession().setAttribute("idAlumno", idAlumno);
                         request.getSession().setAttribute("correo", correo);
                         request.getSession().setAttribute("idGrupo", idGrupo);

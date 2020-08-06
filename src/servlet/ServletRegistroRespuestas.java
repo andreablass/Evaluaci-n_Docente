@@ -1,16 +1,13 @@
 package servlet;
 
-import modelo.BeanDocente;
-import modelo.DaoEvaluacion;
+import dao.DaoEvaluacion;
 
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/ServletRegistroRespuestas")
 public class ServletRegistroRespuestas extends HttpServlet {
@@ -24,12 +21,17 @@ public class ServletRegistroRespuestas extends HttpServlet {
         atenderPeticion(request, response);
     }
     protected void atenderPeticion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        double puntaje = 0;
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
 
+        double puntaje = 0;
         int numeroPregunta = 1;
         while(request.getParameter(numeroPregunta + "")!=null){
+
             puntaje += Integer.parseInt(request.getParameter(numeroPregunta + ""));
+
             numeroPregunta++;
+
         }
         int idPeriodo = Integer.parseInt(request.getParameter("idPeriodo"));
         int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));

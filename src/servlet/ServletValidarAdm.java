@@ -1,6 +1,6 @@
 package servlet;
 
-import modelo.DaoAdministrador;
+import dao.DaoAdministrador;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +23,9 @@ public class ServletValidarAdm extends HttpServlet {
         atenderPeticion(request, response);
     }
     protected void atenderPeticion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
         String usuario = request.getParameter("nombreUsuario");
         String contrasenia = request.getParameter("contrasenia");
 

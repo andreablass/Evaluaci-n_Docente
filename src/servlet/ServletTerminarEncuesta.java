@@ -19,6 +19,9 @@ public class ServletTerminarEncuesta extends HttpServlet {
         atenderPeticion(request, response);
     }
     protected void atenderPeticion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+
         while(request.getSession().getAttributeNames().hasMoreElements()){
             String attribute = request.getSession().getAttributeNames().nextElement();
             request.getSession().removeAttribute(attribute);
